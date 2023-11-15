@@ -1,0 +1,28 @@
+
+<div class="container d-flex justify-content-center">
+  <div class="bg-dark p-5 text-light rounded mt-5" style="width: 50rem;">
+    <div class="pb-5">
+      <h5 class="card-title"><%= @restaurant.name %></h5>
+      <h6 class="card-text"><%= @restaurant.category %></h6>
+      <p><%= @restaurant.address %></p>
+      <%= link_to "Go back to Restaurants", restaurants_path, class: "btn btn-primary" %>
+
+      <h1 class="mt-5">New review</h1>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :content %>
+        <%= f.select :rating, (1..5)  %>
+        <%# <%= f.options_for_select(CATEGORIES) %>
+        <%= f.submit "Submit review", class: "btn btn-primary" %>
+      <% end %>
+
+      <ul class="mt-5 list-unstyled">
+      <% @restaurant.reviews.each do |review| %>
+      <div class="bg-light text-black p-2 card mb-4 d-flex flex-row justify-content-between">
+        <li><%= review.content %></li>
+        <span><%= "⭐️" * review.rating %></span>
+      </div>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
